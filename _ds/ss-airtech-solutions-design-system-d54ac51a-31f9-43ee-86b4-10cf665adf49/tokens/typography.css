@@ -1,0 +1,52 @@
+:root{
+  --text-2xs:11px;
+  --text-xs:12px;
+  --text-sm:14px;
+  --text-base:16px;
+  --text-md:18px;
+  --text-lg:20px;
+  --text-xl:24px;
+  --text-2xl:30px;
+  --text-3xl:38px;
+  --text-4xl:48px;
+  --text-5xl:60px;
+  --text-6xl:76px;
+
+  --leading-tight:1.05;
+  --leading-snug:1.18;
+  --leading-normal:1.5;
+  --leading-relaxed:1.65;
+
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-semibold:600;
+  --weight-bold:700;
+  --weight-black:800;
+
+  --tracking-tight:-0.01em;
+  --tracking-normal:0;
+  --tracking-wide:0.04em;
+  --tracking-caps:0.08em;
+  --tracking-eyebrow:0.16em;
+
+  /* Semantic roles */
+  --type-hero-family:var(--font-display);
+  --type-hero-size:var(--text-6xl);
+  --type-hero-weight:var(--weight-bold);
+  --type-hero-transform:uppercase;
+
+  --type-section-family:var(--font-headline);
+  --type-section-size:var(--text-2xl);
+  --type-section-weight:var(--weight-bold);
+
+  --type-eyebrow-family:var(--font-body);
+  --type-eyebrow-size:var(--text-xs);
+  --type-eyebrow-tracking:var(--tracking-eyebrow);
+
+  --type-body-family:var(--font-body);
+  --type-body-size:var(--text-base);
+  --type-body-leading:var(--leading-relaxed);
+
+  --type-spec-family:var(--font-mono);
+  --type-spec-size:var(--text-sm);
+}
