@@ -96,15 +96,13 @@
           <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Button" variant="secondary" icon-right="arrow-right" on-click="{{ goProducts }}" hint-size="160px,40px">All products</x-import>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-4); margin-top: var(--space-10)">
-          <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="6">
-            <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Card" interactive="{{ true }}" padding="0" style="overflow: hidden" on-click="{{ goProducts }}" hint-size="100%,200px">
-              <div style="height: 150px; background: {{ cat.bg }}; display: grid; place-items: center; padding: var(--space-3)">
-                <sc-if value="{{ cat.img }}" hint-placeholder-val="{{ false }}">
-                  <img src="{{ cat.img }}" alt="{{ cat.title }}" style="max-height: 130px; width: auto; object-fit: contain">
-                </sc-if>
+          <sc-for list="{{ categories }}" as="category" hint-placeholder-count="6">
+            <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); cursor: pointer; background: var(--white)" onclick="{{ goProducts }}">
+              <div style="height: 150px; background: {{ category.bg }}; display: grid; place-items: center; padding: var(--space-3)">
+                <img src="{{ category.img }}" alt="{{ category.title }}" style="max-height: 130px; width: auto; object-fit: contain">
               </div>
-              <div style="padding: var(--space-3) var(--space-4); border-top: 1px solid var(--border-subtle); font-family: var(--font-headline); font-weight: var(--weight-semibold); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--navy-800); text-align: center">{{ cat.title }}</div>
-            </x-import>
+              <div style="padding: var(--space-3) var(--space-4); border-top: 1px solid var(--border-subtle); font-family: var(--font-headline); font-weight: var(--weight-semibold); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--navy-800); text-align: center">{{ category.title }}</div>
+            </div>
           </sc-for>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--space-6); margin-top: var(--space-10)">
@@ -118,6 +116,7 @@
     <section class="reveal" style="background: var(--white); padding: var(--section-pad-y) 0">
       <div style="max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: var(--space-12); align-items: center">
         <div>
+          <img src="assets/product-at-tank-mounted.jpeg" alt="AT DS05LB 250LTS two-stage reciprocating compressor" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md); margin-bottom: var(--space-6)">
           <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.SectionHeading" eyebrow="Built right" hint-size="100%,80px">Key product features</x-import>
           <p style="margin-top: var(--space-5); max-width: var(--measure)">Every AT-series compressor uses a cast iron block, an industrial duty rating and slow running speeds — the combination that keeps wear low and uptime high on a two-shift factory floor.</p>
           <div style="display: flex; gap: var(--space-2); margin-top: var(--space-6); flex-wrap: wrap">
@@ -128,7 +127,6 @@
           </div>
         </div>
         <div style="display: grid; gap: var(--space-5)">
-          <img src="assets/product-at-tank-mounted.jpeg" alt="AT DS05LB 250LTS two-stage reciprocating compressor" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md)">
           <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.FeatureTable" rows="{{ featureRows }}" hint-size="100%,320px"></x-import>
         </div>
       </div>
@@ -197,19 +195,36 @@
       </div>
     </section>
 
-    <section class="reveal" style="padding: var(--section-pad-y) 0; background: var(--white)">
+    <section class="reveal" style="padding: var(--section-pad-y) 0; background: var(--white); display: {{ specSectionDisplay }}">
       <div style="max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6)">
         <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.SectionHeading" eyebrow="Datasheet" hint-size="100%,80px">Technical specification</x-import>
         <div style="margin: var(--space-6) 0">
           <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Tabs" items="{{ specTabs }}" active="{{ tab }}" on-change="{{ setTab }}" hint-size="100%,44px"></x-import>
         </div>
-        <div style="overflow-x: auto">
-          <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.SpecTable" columns="{{ specColumns }}" groups="{{ specGroups }}" caption="{{ specCaption }}" hint-size="720px,520px"></x-import>
-        </div>
+        <sc-if value="{{ showSpecTable }}" hint-placeholder-val="{{ false }}">
+          <div style="overflow-x: auto">
+            <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.SpecTable" columns="{{ specColumns }}" groups="{{ specGroups }}" caption="{{ specCaption }}" hint-size="720px,520px"></x-import>
+          </div>
+        </sc-if>
+        <sc-if value="{{ showContactNote }}" hint-placeholder-val="{{ true }}">
+          <p style="margin-top: var(--space-4); color: var(--text-muted); max-width: var(--measure)">For specification, contact SS AirTech Solutions — {{ specContactPhones }}.</p>
+          <sc-if value="{{ isSollantScrewTab }}" hint-placeholder-val="{{ false }}">
+            <p style="margin-top: var(--space-2); color: var(--text-muted); max-width: var(--measure)">Compressor Models SLT-7.5 kW to SLT-250 kW, Fixed and PM VFD.</p>
+          </sc-if>
+          <sc-if value="{{ isTankMountedTab }}" hint-placeholder-val="{{ false }}">
+            <p style="margin-top: var(--space-2); color: var(--text-muted); max-width: var(--measure)">Compressor Models SLT-7.5 kW to SLT-22 kW, Fixed and PM VFD.</p>
+          </sc-if>
+          <sc-if value="{{ isSingleStageTab }}" hint-placeholder-val="{{ false }}">
+            <p style="margin-top: var(--space-2); color: var(--text-muted); max-width: var(--measure)">Compressor Models AT SS03 LB to AT SS15 LB.</p>
+          </sc-if>
+          <sc-if value="{{ isTwoStageTab }}" hint-placeholder-val="{{ false }}">
+            <p style="margin-top: var(--space-2); color: var(--text-muted); max-width: var(--measure)">Compressor Models AT DS03 LB to AT DS15 LB.</p>
+          </sc-if>
+        </sc-if>
       </div>
     </section>
 
-    <section class="reveal" style="padding: var(--section-pad-y) 0; background: var(--surface-subtle)">
+    <section class="reveal" style="padding: var(--section-pad-y) 0; background: var(--surface-subtle); display: {{ showDownloads }}">
       <div style="max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-6)">
         <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.SectionHeading" eyebrow="Downloads" hint-size="100%,80px">Catalogues and datasheets</x-import>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: var(--space-6); margin-top: var(--space-10)">
@@ -256,7 +271,7 @@
           <div style="margin-top: var(--space-8); display: flex; gap: var(--space-10); flex-wrap: wrap">
             <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="35+ years" label="Industry experience" hint-size="150px,64px"></x-import>
             <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="Coimbatore" label="Head office" hint-size="150px,64px"></x-import>
-            <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="Pan India" label="Service network" hint-size="150px,64px"></x-import>
+            <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="Tamil Nadu & Kerala" label="Service network" hint-size="150px,64px"></x-import>
           </div>
           <div style="margin-top: var(--space-8); border: 1px dashed var(--blue-300); border-radius: var(--radius-md); padding: var(--space-5); background: var(--surface-subtle)">
             <div style="font-family: var(--font-headline); font-size: var(--text-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--navy-700)">To be supplied</div>
@@ -274,20 +289,22 @@
         <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.SectionHeading" eyebrow="Leadership" hint-size="100%,80px">Partners</x-import>
         <p style="margin-top: var(--space-4); max-width: var(--measure); color: var(--text-muted)">Names, roles and photographs to be added.</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: var(--space-6); margin-top: var(--space-10)">
-          <sc-for list="{{ founders }}" as="f" hint-placeholder-count="3">
-            <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Card" padding="0" style="overflow: hidden" hint-size="100%,380px">
-              <div style="aspect-ratio: 4 / 3; background: var(--blue-100); display: grid; place-items: center; border-bottom: 1px solid var(--border-subtle)">
+          <sc-for list="{{ founders }}" as="founder" hint-placeholder-count="3">
+            <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); background: var(--white); padding: var(--space-6); text-align: center">
+              <div style="width: 160px; height: 160px; margin: 0 auto; border-radius: 50%; background: var(--blue-100); display: grid; place-items: center; overflow: hidden">
+                <img src="{{ founder.photoSrc }}" alt="{{ founder.name }}" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: {{ founder.photoDisplay }}">
+                <sc-if value="{{ founder.noPhoto }}" hint-placeholder-val="{{ true }}">
                 <div style="text-align: center; color: var(--navy-700)">
                   <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Icon" name="user" size="34" color="var(--navy-700)" hint-size="34px,34px"></x-import>
-                  <div style="margin-top: 8px; font-size: var(--text-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase">Photograph to be added</div>
                 </div>
+                </sc-if>
               </div>
-              <div style="padding: var(--space-5)">
-                <h3 style="margin: 0; font-size: var(--text-lg); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--navy-800)">{{ f.name }}</h3>
-                <div style="margin-top: 4px; font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--green-600); letter-spacing: var(--tracking-wide); text-transform: uppercase">{{ f.role }}</div>
-                <p style="margin-top: var(--space-3); font-size: var(--text-sm); color: var(--text-muted)">{{ f.bio }}</p>
+              <div style="padding-top: var(--space-5)">
+                <h3 style="margin: 0; font-size: var(--text-lg); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--navy-800)">{{ founder.name }}</h3>
+                <div style="margin-top: 4px; font-size: var(--text-sm); font-weight: var(--weight-bold); color: var(--green-600); letter-spacing: var(--tracking-wide); text-transform: uppercase">{{ founder.role }}</div>
+                <p style="margin-top: var(--space-3); font-size: var(--text-sm); color: var(--text-muted)">{{ founder.bio }}</p>
               </div>
-            </x-import>
+            </div>
           </sc-for>
         </div>
       </div>
@@ -338,15 +355,19 @@
             <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
               <div style="display: grid; gap: var(--space-5)">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: var(--space-5)">
-                  <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Full name" placeholder="Your name" required="{{ true }}" hint-size="100%,70px"></x-import>
-                  <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Company" placeholder="Company name" hint-size="100%,70px"></x-import>
+                  <div ref="{{ nameRef }}"><x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Full name" placeholder="Your name" required="{{ true }}" error="{{ nameError }}" hint-size="100%,70px"></x-import></div>
+                  <div ref="{{ companyRef }}"><x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Company" placeholder="Company name" required="{{ true }}" error="{{ companyError }}" hint-size="100%,70px"></x-import></div>
                 </div>
-                <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Phone" placeholder="98765 43210" required="{{ true }}" hint-size="100%,70px"></x-import>
-                <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Select" label="Product interest" options="{{ enquiryOptions }}" hint-size="100%,70px"></x-import>
-                <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Your requirement" as="textarea" placeholder="HP, working pressure, application, quantity" hint-size="100%,110px"></x-import>
+                <div ref="{{ phoneRef }}"><x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Phone" placeholder="98765 43210" required="{{ true }}" error="{{ phoneError }}" hint-size="100%,70px"></x-import></div>
+                <div ref="{{ emailRef }}"><x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Email" placeholder="you@company.com" required="{{ true }}" error="{{ emailError }}" hint-size="100%,70px"></x-import></div>
+                <div ref="{{ productRef }}"><x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Select" label="Product interest" options="{{ enquiryOptions }}" hint-size="100%,70px"></x-import></div>
+                <div ref="{{ messageRef }}"><x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Input" label="Your requirement" as="textarea" placeholder="HP, working pressure, application, quantity" hint-size="100%,110px"></x-import></div>
+                <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
+                  <div style="color: var(--red-600, #BE0014); font-size: var(--text-sm)">{{ formError }}</div>
+                </sc-if>
                 <div style="display: flex; gap: var(--space-3); flex-wrap: wrap">
                   <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Button" size="lg" icon-right="send" on-click="{{ submit }}" hint-size="180px,48px">Send enquiry</x-import>
-                  <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Button" variant="eco" size="lg" icon="message-circle" hint-size="200px,48px">Enquire on WhatsApp</x-import>
+                  <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Button" variant="eco" size="lg" icon="message-circle" on-click="{{ openWhatsApp }}" hint-size="200px,48px">Enquire on WhatsApp</x-import>
                 </div>
               </div>
             </sc-if>
@@ -362,7 +383,7 @@
               </span>
               <span style="display: flex; gap: 12px">
                 <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Icon" name="phone" size="18" color="var(--green-400)" hint-size="18px,18px"></x-import>
-                <span>9790029225</span>
+                <span>9790029225 / 9790029316 / 9790039214</span>
               </span>
               <span style="display: flex; gap: 12px">
                 <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.Icon" name="mail" size="18" color="var(--green-400)" hint-size="18px,18px"></x-import>
@@ -398,20 +419,21 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;showIndustries&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home page&quot;},&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Home&quot;,&quot;Products&quot;,&quot;About&quot;,&quot;Contact&quot;],&quot;default&quot;:&quot;Home&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Preview&quot;}}">
 const MODELS = [
-  { model: 'SLT 15V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-slt-15v.png', specs: ['15 kW', '20 HP', '8–16 bar'], badge: 'PM VSD' },
-  { model: 'SLT 37V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-slt-37v.png', specs: ['37 kW', '50 HP', '8–16 bar'], badge: 'PM VSD' },
-  { model: 'SLT 45V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-slt-45v.png', specs: ['45 kW', '60 HP', '8–16 bar'], badge: 'PM VSD' },
-  { model: 'SLT-22F', name: 'Sollant · fixed speed screw', range: 'Screw compressors', img: 'assets/sollant-slt-37v.png', specs: ['22 kW', '30 HP', '8–16 bar'] },
-  { model: 'SLT-45F', name: 'Sollant · fixed speed screw', range: 'Screw compressors', img: 'assets/sollant-slt-45v.png', specs: ['45 kW', '60 HP', '8–16 bar'] },
+  { model: 'SLT 15V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['15 kW', '20 HP', '8–16 bar'], badge: 'PM VSD' },
+  { model: 'SLT 37V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['37 kW', '50 HP', '8–16 bar'], badge: 'PM VSD' },
+  { model: 'SLT 45V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['45 kW', '60 HP', '8–16 bar'], badge: 'PM VSD' },
+  { model: 'SLT-22F', name: 'Sollant · fixed speed screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['22 kW', '30 HP', '8–16 bar'] },
+  { model: 'SLT-11F', name: 'Sollant · fixed speed screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['11 kW', '15 HP', '8–16 bar'] },
   { model: 'Air dryers', name: 'Refrigerated air dryers', range: 'Screw compressors', img: 'assets/sollant-air-dryer.png', specs: ['Post-processing'], dark: true },
+  { model: 'SLT-7.5 to 22 kW', name: 'Sollant · tank mounted 4-in-1', range: 'Tank mounted', img: 'assets/sollant-slt-tank-mounted.png', specs: ['4-in-1', 'Integrated receiver', '8–16 bar'] },
   { model: 'AT SS03 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-tank-mounted-500l.jpeg', specs: ['3 HP', '160 L', '9 kg/cm²'] },
   { model: 'AT SS05 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-piston-compressor.png', specs: ['5 HP', '220 L', '9 kg/cm²'] },
   { model: 'AT SS07 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-at-ss07.png', specs: ['7.5 HP', '220 L', '9 kg/cm²'] },
   { model: 'AT SS10 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-at-ss10.png', specs: ['10 HP', '220 L', '9 kg/cm²'] },
   { model: 'AT SS15 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-at-ss15.png', specs: ['15 HP', '500 L', '9 kg/cm²'], badge: 'IE2' },
   { model: 'AT DS03 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['3 HP', '160 L', '12 kg/cm²'] },
-  { model: 'AT DS05 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['3 HP', '220 L', '12 kg/cm²'] },
-  { model: 'AT DS07 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['5 HP', '220 L', '12 kg/cm²'] },
+  { model: 'AT DS05 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['5 HP', '220 L', '12 kg/cm²'] },
+  { model: 'AT DS07 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['7 HP', '220 L', '12 kg/cm²'] },
   { model: 'AT DS10 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['10 HP', '220–420 L', '12 kg/cm²'] },
   { model: 'AT DS15 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-3.jpeg', specs: ['15 HP', '500 L', '12 kg/cm²'] },
   { model: 'VFD control panel', name: 'Starter & VFD panels', range: 'Accessories', img: 'assets/product-vfd-panel.jpg', specs: ['3–30 HP', 'IP54'] },
@@ -491,6 +513,71 @@ const AT_TWO = [{ label: 'Two-stage', note: '(maximum pressure 12 kg/cm² or 175
   ['AT DS15 LB*', '1538', '54.3', '1249', '44.1', '15.0', '11.0', '1150', '3', '500', '1915×875×1420', '408'],
 ] }];
 
+const TM_COLUMNS = ['Model', 'kW', 'HP', 'Bar', 'm³/min', 'cfm', 'Air tank (L)', 'L×W×H (mm)', 'Weight kg'];
+const TM_GROUPS = [
+  { label: 'SLT-7.5F', note: '(7.5 kW · 10 HP)', rows: [
+    ['SLT-7.5F', '7.5', '10', '8', '1.10', '38.84', '10', '—', '370'],
+    ['SLT-7.5F', '7.5', '10', '10', '0.90', '31.78', '10', '—', '370'],
+    ['SLT-7.5F', '7.5', '10', '12', '0.63', '22.25', '10', '—', '370'],
+  ] },
+  { label: 'SLT-11F', note: '(11 kW · 15 HP)', rows: [
+    ['SLT-11F', '11', '15', '8', '1.75', '61.79', '16', '1560×710×1450', '550'],
+    ['SLT-11F', '11', '15', '10', '1.65', '58.26', '16', '1560×710×1450', '550'],
+    ['SLT-11F', '11', '15', '12', '1.10', '38.84', '16', '1560×710×1450', '550'],
+    ['SLT-11F', '11', '15', '16', '0.88', '31.07', '16', '1560×710×1450', '550'],
+  ] },
+  { label: 'SLT-15F', note: '(15 kW · 20 HP)', rows: [
+    ['SLT-15F', '15', '20', '8', '2.44', '86.16', '16', '1780×740×1610', '550'],
+    ['SLT-15F', '15', '20', '10', '2.20', '77.68', '16', '1780×740×1610', '550'],
+    ['SLT-15F', '15', '20', '12', '1.87', '66.03', '16', '1780×740×1610', '550'],
+    ['SLT-15F', '15', '20', '16', '1.10', '38.84', '16', '1780×740×1610', '550'],
+  ] },
+  { label: 'SLT-18F', note: '(18.5 kW · 25 HP)', rows: [
+    ['SLT-18F', '18.5', '25', '8', '3.00', '105.93', '16', '1560×710×1450', '900'],
+    ['SLT-18F', '18.5', '25', '10', '2.70', '95.34', '16', '1560×710×1450', '900'],
+    ['SLT-18F', '18.5', '25', '12', '2.30', '81.21', '16', '1560×710×1450', '900'],
+    ['SLT-18F', '18.5', '25', '16', '1.85', '65.32', '16', '1560×710×1450', '900'],
+  ] },
+  { label: 'SLT-22F', note: '(22 kW · 30 HP)', rows: [
+    ['SLT-22F', '22', '30', '8', '3.60', '127.12', '20', '1780×740×1611', '900'],
+    ['SLT-22F', '22', '30', '10', '3.20', '112.99', '20', '1780×740×1611', '900'],
+    ['SLT-22F', '22', '30', '12', '2.60', '91.81', '20', '1780×740×1611', '900'],
+    ['SLT-22F', '22', '30', '16', '2.30', '81.21', '20', '1780×740×1611', '900'],
+  ] },
+];
+const TM_PM_COLUMNS = ['Model', 'kW', 'HP', 'Bar', 'm³/min (min–max)', 'cfm (min–max)', 'Air tank (L)', 'Weight kg'];
+const TM_PM_GROUPS = [
+  { label: 'SLT-7.5F PM VSD', note: '(7.5 kW · 10 HP)', rows: [
+    ['SLT-7.5F PM', '7.5', '10', '8', '0.49–1.10', '17.3–38.8', '10', '370'],
+    ['SLT-7.5F PM', '7.5', '10', '10', '0.40–0.90', '14.1–31.8', '10', '370'],
+    ['SLT-7.5F PM', '7.5', '10', '12', '0.28–0.63', '9.9–22.3', '10', '370'],
+  ] },
+  { label: 'SLT-11F PM VSD', note: '(11 kW · 15 HP)', rows: [
+    ['SLT-11F PM', '11', '15', '8', '0.78–1.75', '27.5–61.8', '16', '550'],
+    ['SLT-11F PM', '11', '15', '10', '0.74–1.65', '26.1–58.3', '16', '550'],
+    ['SLT-11F PM', '11', '15', '12', '0.49–1.10', '17.3–38.8', '16', '550'],
+    ['SLT-11F PM', '11', '15', '16', '0.39–0.88', '13.8–31.1', '16', '550'],
+  ] },
+  { label: 'SLT-15F PM VSD', note: '(15 kW · 20 HP)', rows: [
+    ['SLT-15F PM', '15', '20', '8', '1.10–2.44', '38.8–86.2', '16', '550'],
+    ['SLT-15F PM', '15', '20', '10', '0.99–2.20', '35.0–77.7', '16', '550'],
+    ['SLT-15F PM', '15', '20', '12', '0.84–1.87', '29.7–66.0', '16', '550'],
+    ['SLT-15F PM', '15', '20', '16', '0.49–1.10', '17.3–38.8', '16', '550'],
+  ] },
+  { label: 'SLT-18F PM VSD', note: '(18.5 kW · 25 HP)', rows: [
+    ['SLT-18F PM', '18.5', '25', '8', '1.35–3.00', '47.7–105.9', '16', '900'],
+    ['SLT-18F PM', '18.5', '25', '10', '1.21–2.70', '42.7–95.3', '16', '900'],
+    ['SLT-18F PM', '18.5', '25', '12', '1.03–2.30', '36.4–81.2', '16', '900'],
+    ['SLT-18F PM', '18.5', '25', '16', '0.83–1.85', '29.3–65.3', '16', '900'],
+  ] },
+  { label: 'SLT-22F PM VSD', note: '(22 kW · 30 HP)', rows: [
+    ['SLT-22F PM', '22', '30', '8', '1.62–3.60', '57.2–127.1', '20', '900'],
+    ['SLT-22F PM', '22', '30', '10', '1.44–3.20', '50.8–113.0', '20', '900'],
+    ['SLT-22F PM', '22', '30', '12', '1.17–2.60', '41.3–91.8', '20', '900'],
+    ['SLT-22F PM', '22', '30', '16', '1.03–2.30', '36.4–81.2', '20', '900'],
+  ] },
+];
+
 class Component extends DCLogic {
   state = { page: this.props.startPage || 'Home', range: 'Screw compressors', tab: 'Sollant screw', sent: false };
 
@@ -498,6 +585,83 @@ class Component extends DCLogic {
     this.setState({ page: p });
     if (typeof window !== 'undefined') window.scrollTo({ top: 0 });
   };
+
+  _rangeToTab = { 'Screw compressors': 'Sollant screw', 'Tank mounted': 'Tank mounted', 'Single-stage': 'Single-stage', 'Two-stage': 'Two-stage' };
+
+  _selectRange = (r) => {
+    const tab = this._rangeToTab[r];
+    this.setState(tab ? { range: r, tab } : { range: r });
+  };
+
+  _nameRef = React.createRef();
+  _companyRef = React.createRef();
+  _phoneRef = React.createRef();
+  _emailRef = React.createRef();
+  _productRef = React.createRef();
+  _messageRef = React.createRef();
+
+  submit = () => {
+    const getVal = (ref) => {
+      const el = ref.current;
+      if (!el) return '';
+      const input = el.querySelector ? (el.querySelector('input,textarea,select') || el) : el;
+      return (input.value || '').trim();
+    };
+    const name = getVal(this._nameRef);
+    const phone = getVal(this._phoneRef);
+    const company = getVal(this._companyRef);
+    const email = getVal(this._emailRef);
+    let nameError = null, phoneError = null, companyError = null, emailError = null;
+    if (!name) nameError = 'Name is required';
+    if (!company) companyError = 'Company is required';
+    if (!phone) phoneError = 'Phone number is required';
+    else if (!/^[0-9+\-\s()]{7,}$/.test(phone)) phoneError = 'Enter a valid phone number';
+    if (!email) emailError = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) emailError = 'Enter a valid email address';
+    if (nameError || phoneError || companyError || emailError) {
+      this.setState({ nameError, phoneError, companyError, emailError, formError: 'Please fill in all required fields.' });
+      return;
+    }
+    const product = getVal(this._productRef);
+    const message = getVal(this._messageRef);
+    this._postToGoogleForm({ name, company, phone, email, product, message });
+    this.setState({ sent: true, nameError: null, phoneError: null, companyError: null, emailError: null, formError: null });
+  };
+
+  _postToGoogleForm(data) {
+    if (typeof document === 'undefined') return;
+    const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLScdbfh7oxTOXiBPfiWgaTDOAfEV0qRA6cPPrevdxgv8CNERBg/formResponse';
+    const FIELD_MAP = {
+      'entry.2034497821': data.name,
+      'entry.1784937079': data.email,
+      'entry.1057479116': data.company,
+      'entry.2052149636': data.phone,
+      'entry.919523926': data.product,
+      'entry.814119400': data.message,
+    };
+    let iframe = document.getElementById('ss-gform-sink');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = 'ss-gform-sink';
+      iframe.name = 'ss-gform-sink';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    const form = document.createElement('form');
+    form.action = FORM_ACTION;
+    form.method = 'POST';
+    form.target = 'ss-gform-sink';
+    Object.entries(FIELD_MAP).forEach(([k, v]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = k;
+      input.value = v || '';
+      form.appendChild(input);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+  }
 
   _seo = {
     Home: ['SS AirTech Solutions — Authorised Sollant Screw Compressor Dealer, Coimbatore', 'SS AirTech Solutions supplies, installs and services Sollant screw air compressors and AT-series reciprocating compressors in Coimbatore, Tamil Nadu.'],
@@ -550,11 +714,13 @@ class Component extends DCLogic {
     const page = this.state.page;
     const range = this.state.range;
     const tab = this.state.tab;
-    const ranges = ['All', 'Screw compressors', 'Single-stage', 'Two-stage', 'Accessories'];
+    const ranges = ['All', 'Screw compressors', 'Tank mounted', 'Single-stage', 'Two-stage', 'Accessories'];
     const specs = {
       'Sollant screw': { columns: SLT_COLUMNS, groups: SLT_GROUPS, caption: 'Fixed & PM VSD speed screw air compressor range. Capacity shown at each working pressure. PM VSD (V-suffix) models share the same frames and power ratings. Specifications subject to change without prior notice.' },
       'Single-stage': { columns: AT_COLUMNS, groups: AT_SINGLE, caption: 'Free air delivery measured as per IS 5456 at working pressures — S5 models at 7 kg/cm². Available in base mounted versions also. Specifications subject to change without prior notice.' },
       'Two-stage': { columns: AT_COLUMNS, groups: AT_TWO, caption: 'Free air delivery measured as per IS 5456 — S5 models at 7 kg/cm², T5 models at 10 kg/cm². * Available in base mounted versions also. Specifications subject to change without prior notice.' },
+      'Tank mounted': { columns: TM_COLUMNS, groups: TM_GROUPS, caption: 'Fixed speed tank-mounted screw air compressor range — 4-in-1 unit with integrated receiver, air end, motor and controls. Capacity shown at each working pressure. Specifications subject to change without prior notice.' },
+      'Tank mounted PM VSD': { columns: TM_PM_COLUMNS, groups: TM_PM_GROUPS, caption: 'PM VSD (permanent magnet variable speed drive) tank-mounted screw air compressor range. Capacity shown as the min–max range across the variable speed band at each working pressure. Specifications subject to change without prior notice.' },
     };
     const spec = specs[tab] || specs['Sollant screw'];
     return {
@@ -565,6 +731,7 @@ class Component extends DCLogic {
       goProducts: () => this.go('Products'),
       isHome: page === 'Home',
       isProducts: page === 'Products',
+      specSectionDisplay: range === 'Accessories' ? 'none' : 'block',
       isAbout: page === 'About',
       isContact: page === 'Contact',
       showIndustries: this.props.showIndustries !== false,
@@ -572,7 +739,7 @@ class Component extends DCLogic {
         { icon: 'zap', title: 'Energy efficient', sub: 'PM VSD screw units cut running cost' },
         { icon: 'shield-check', title: 'Built to last', sub: 'Heavy duty industrial construction' },
         { icon: 'wrench', title: 'Sales · Service · AMC', sub: 'One partner for the whole installation' },
-        { icon: 'truck', title: 'Wide service support', sub: 'Pan India service network' },
+        { icon: 'truck', title: 'Wide service support', sub: 'Tamil Nadu & Kerala service network' },
       ],
       sollantClaims: ['Advanced German technology', 'Energy efficient & cost saving', 'Reliable performance', 'Low maintenance', 'Long service life', 'Global quality standards'],
       categories: [
@@ -623,29 +790,44 @@ class Component extends DCLogic {
         { name: 'Wastewater treatment', icon: 'droplets' },
         { name: 'Aquaculture', icon: 'fish' },
       ],
-      rangeTags: ranges.map(r => ({ label: r, active: r === range, onClick: () => this.setState({ range: r }) })),
+      rangeTags: ranges.map(r => ({ label: r, active: r === range, onClick: () => this._selectRange(r) })),
       visibleModels: (range === 'All' ? MODELS : MODELS.filter(m => m.range === range)).map(m => ({ ...m, bg: m.dark ? 'var(--navy-950)' : undefined })),
-      specTabs: ['Sollant screw', 'Single-stage', 'Two-stage'],
+      specTabs: ['Sollant screw', 'Tank mounted', 'Single-stage', 'Two-stage'],
       tab,
       setTab: (t) => this.setState({ tab: t }),
       specColumns: spec.columns,
       specGroups: spec.groups,
       specCaption: spec.caption,
-      downloads: [
-        { title: 'Screw compressor datasheet', sub: 'SLT-7.5F to SLT-45F, tank and floor mounted — PDF', href: 'downloads/screw-compressor-datasheet.pdf' },
-        { title: 'AT series catalogue', sub: 'Single-stage AT SS series and two-stage AT DS series reciprocating range — PDF', href: 'downloads/at-series-catalogue.pdf' },
-        { title: 'Sollant brochure', sub: 'Full manufacturer product portfolio — PDF', href: 'downloads/sollant-stahl-brochure.pdf' },
-        { title: 'PM VSD speed datasheet', sub: 'PM VSD (V-suffix) screw compressor specifications — PDF', href: 'downloads/pm-vsd-speed-datasheet.pdf' },
-      ],
+      showSpecTable: false,
+      showContactNote: true,
+      specContactPhones: (tab === 'Single-stage' || tab === 'Two-stage') ? '9790029316' : '9790029225 / 9790039214',
+      isSollantScrewTab: tab === 'Sollant screw',
+      isTankMountedTab: tab === 'Tank mounted',
+      isSingleStageTab: tab === 'Single-stage',
+      isTwoStageTab: tab === 'Two-stage',
+      downloads: [],
+      showDownloads: 'none',
       founders: [
-        { name: 'D. Shanmugam', role: 'Founder', bio: 'A short line about background and role in the business.' },
-        { name: 'A. Saravanan', role: 'Partner', bio: 'A short line about background and role in the business.' },
-        { name: 'V. Rajasekaramaran', role: 'Partner', bio: 'A short line about background and role in the business.' },
+        { name: 'D. Shanmugam', role: 'Founder', bio: 'A short line about background and role in the business.', photoSrc: 'assets/founder-shanmugam.jpg', photoDisplay: 'block', noPhoto: false },
+        { name: 'A. Saravanan', role: 'Partner', bio: 'A short line about background and role in the business.', photoSrc: 'assets/founder-saravanan.jpg', photoDisplay: 'block', noPhoto: false },
+        { name: 'V. Rajasekaramaran', role: 'Partner', bio: 'A short line about background and role in the business.', photoSrc: '', photoDisplay: 'none', noPhoto: true },
       ],
       sent: this.state.sent,
       notSent: !this.state.sent,
-      submit: () => this.setState({ sent: true }),
-      reset: () => this.setState({ sent: false }),
+      nameRef: this._nameRef,
+      companyRef: this._companyRef,
+      phoneRef: this._phoneRef,
+      emailRef: this._emailRef,
+      productRef: this._productRef,
+      messageRef: this._messageRef,
+      nameError: this.state.nameError,
+      phoneError: this.state.phoneError,
+      companyError: this.state.companyError,
+      emailError: this.state.emailError,
+      formError: this.state.formError,
+      submit: this.submit,
+      openWhatsApp: () => { if (typeof window !== 'undefined') window.open('https://wa.me/919790029225?text=' + encodeURIComponent('Hi, I would like to enquire about your compressors.'), '_blank'); },
+      reset: () => this.setState({ sent: false, nameError: null, phoneError: null, companyError: null, emailError: null, formError: null }),
       enquiryOptions: ['Screw air compressors', 'AT series reciprocating compressors', 'Air dryers, tanks & filters', 'Spare parts & service', 'Annual maintenance contract'],
       footerColumns: [
         { title: 'Products', links: ['Screw air compressors', 'AT series compressors', 'Air dryers & tanks', 'Filters & piping', 'Genuine spare parts'] },

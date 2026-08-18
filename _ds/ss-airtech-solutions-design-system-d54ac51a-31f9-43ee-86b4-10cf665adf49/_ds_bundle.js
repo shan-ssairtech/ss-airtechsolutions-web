@@ -1131,7 +1131,7 @@ function SiteFooter({
     name: "mail",
     size: 16,
     color: "var(--green-400)"
-  }), "support@ssairtechsolution.com"))), columns.map((col, i) => /*#__PURE__*/React.createElement("div", {
+  }), "support@ssairtechsolutions.com"))), columns.map((col, i) => /*#__PURE__*/React.createElement("div", {
     key: i
   }, /*#__PURE__*/React.createElement("h3", {
     style: {
@@ -1267,7 +1267,7 @@ function SiteHeader({
     name: "mail",
     size: 13,
     color: "var(--green-400)"
-  }), "support@ssairtechsolution.com")))), /*#__PURE__*/React.createElement("div", {
+  }), "support@ssairtechsolutions.com")))), /*#__PURE__*/React.createElement("div", {
     style: {
       borderBottom: '1px solid var(--border-subtle)',
       boxShadow: 'var(--shadow-xs)'
@@ -1554,7 +1554,7 @@ function Contact() {
     name: "mail",
     size: 18,
     color: "var(--green-400)"
-  }), "support@ssairtechsolution.com"), /*#__PURE__*/React.createElement("span", {
+  }), "support@ssairtechsolutions.com"), /*#__PURE__*/React.createElement("span", {
     style: {
       display: 'flex',
       gap: 12
