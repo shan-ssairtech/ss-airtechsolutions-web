@@ -270,12 +270,13 @@
           <p style="margin-top: var(--space-4); max-width: var(--measure)">Customers come from automotive, textile, food and beverage, pharmaceutical, engineering and plastics manufacturing. Every quotation is prepared by an engineer against your actual duty cycle, not a catalogue guess.</p>
           <div style="margin-top: var(--space-8); display: flex; gap: var(--space-10); flex-wrap: wrap">
             <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="35+ years" label="Industry experience" hint-size="150px,64px"></x-import>
+            <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="June 2026" label="Year founded" hint-size="150px,64px"></x-import>
             <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="Coimbatore" label="Head office" hint-size="150px,64px"></x-import>
             <x-import component-from-global-scope="SSAirTechSolutionsDesignSystem_d54ac5.StatBlock" value="Tamil Nadu & Kerala" label="Service network" hint-size="150px,64px"></x-import>
           </div>
           <div style="margin-top: var(--space-8); border: 1px dashed var(--blue-300); border-radius: var(--radius-md); padding: var(--space-5); background: var(--surface-subtle)">
             <div style="font-family: var(--font-headline); font-size: var(--text-xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--navy-700)">To be supplied</div>
-            <p style="margin: var(--space-2) 0 0; font-size: var(--text-sm); color: var(--text-muted)">Year founded, number of installations, certifications and any customer names you want listed here.</p>
+            <p style="margin: var(--space-2) 0 0; font-size: var(--text-sm); color: var(--text-muted)">Year Founded: June 2026.</p>.</p>
           </div>
         </div>
         <div>
@@ -419,23 +420,13 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;showIndustries&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home page&quot;},&quot;startPage&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Home&quot;,&quot;Products&quot;,&quot;About&quot;,&quot;Contact&quot;],&quot;default&quot;:&quot;Home&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Preview&quot;}}">
 const MODELS = [
-  { model: 'SLT 15V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['15 kW', '20 HP', '8–16 bar'], badge: 'PM VSD' },
-  { model: 'SLT 37V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['37 kW', '50 HP', '8–16 bar'], badge: 'PM VSD' },
-  { model: 'SLT 45V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['45 kW', '60 HP', '8–16 bar'], badge: 'PM VSD' },
-  { model: 'SLT-22F', name: 'Sollant · fixed speed screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['22 kW', '30 HP', '8–16 bar'] },
-  { model: 'SLT-11F', name: 'Sollant · fixed speed screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['11 kW', '15 HP', '8–16 bar'] },
+  { model: 'SLT-7.5 to 250 kW', name: 'Sollant Fixed', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['7.5–250 kW', '10–335 HP', '8–16 bar'], badge: 'FIXED' },
+  { model: 'SLT-7.5 to SLT 250V', name: 'Sollant · PM VSD screw', range: 'Screw compressors', img: 'assets/sollant-generic-unit.png', specs: ['37 kW', '50 HP', '8–16 bar'], badge: 'PM VSD' },
   { model: 'Air dryers', name: 'Refrigerated air dryers', range: 'Screw compressors', img: 'assets/sollant-air-dryer.png', specs: ['Post-processing'], dark: true },
-  { model: 'SLT-7.5 to 22 kW', name: 'Sollant · tank mounted 4-in-1', range: 'Tank mounted', img: 'assets/sollant-slt-tank-mounted.png', specs: ['4-in-1', 'Integrated receiver', '8–16 bar'] },
-  { model: 'AT SS03 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-tank-mounted-500l.jpeg', specs: ['3 HP', '160 L', '9 kg/cm²'] },
-  { model: 'AT SS05 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-piston-compressor.png', specs: ['5 HP', '220 L', '9 kg/cm²'] },
-  { model: 'AT SS07 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-at-ss07.png', specs: ['7.5 HP', '220 L', '9 kg/cm²'] },
-  { model: 'AT SS10 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-at-ss10.png', specs: ['10 HP', '220 L', '9 kg/cm²'] },
-  { model: 'AT SS15 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-at-ss15.png', specs: ['15 HP', '500 L', '9 kg/cm²'], badge: 'IE2' },
-  { model: 'AT DS03 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['3 HP', '160 L', '12 kg/cm²'] },
-  { model: 'AT DS05 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['5 HP', '220 L', '12 kg/cm²'] },
-  { model: 'AT DS07 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['7 HP', '220 L', '12 kg/cm²'] },
-  { model: 'AT DS10 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['10 HP', '220–420 L', '12 kg/cm²'] },
-  { model: 'AT DS15 LB', name: 'AT series · two-stage', range: 'Two-stage', img: 'assets/product-screw-3.jpeg', specs: ['15 HP', '500 L', '12 kg/cm²'] },
+  { model: 'SLT-7.5 to 22 kW', name: 'Sollant · tank mounted 4-in-1 Fixed and PM VFD', range: 'Tank mounted', img: 'assets/sollant-slt-tank-mounted.png', specs: ['4-in-1', 'Integrated receiver', '8–16 bar'] },
+  { model: 'AT SS03 LB & AT SS05 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-tank-mounted-500l.jpeg', specs: ['3 HP & 5 HP', '160 L', '9 kg/cm²'] },
+  { model: 'AT SS07 LB to AT SS15 LB', name: 'AT series · single-stage', range: 'Single-stage', img: 'assets/product-piston-compressor.png', specs: ['7 HP to 15 HP', '220 L', '9 kg/cm²'] },
+  { model: 'AT DS03 to DS15 LB', name: 'AT series two stage', range: 'Two-stage', img: 'assets/product-screw-2.jpeg', specs: ['3 HP to 15 HP', '160 L', '12 kg/cm²'] },
   { model: 'VFD control panel', name: 'Starter & VFD panels', range: 'Accessories', img: 'assets/product-vfd-panel.jpg', specs: ['3–30 HP', 'IP54'] },
   { model: 'Air tanks', name: 'Receivers', range: 'Accessories', img: 'assets/sollant-air-tank.png', specs: ['160–500 L'], dark: true },
   { model: 'Air filters', name: 'Line filters', range: 'Accessories', img: 'assets/sollant-air-filters.png', specs: ['Particulate', 'Coalescing'], dark: true },
@@ -748,7 +739,6 @@ class Component extends DCLogic {
         { title: 'Air dryers', img: 'assets/sollant-air-dryer.png', bg: 'var(--navy-950)' },
         { title: 'Air filters', img: 'assets/sollant-air-filters.png', bg: 'var(--navy-950)' },
         { title: 'Piping solutions', img: 'assets/sollant-piping-solutions.png', bg: 'var(--navy-950)' },
-        { title: 'Genuine spare parts', img: 'assets/sollant-genuine-spare-parts.png', bg: 'var(--navy-950)' },
       ],
       featured: MODELS.slice(0, 3).concat([MODELS[12]]).map(m => ({ ...m, bg: m.dark ? 'var(--navy-950)' : undefined })),
       featureRows: [
@@ -808,9 +798,9 @@ class Component extends DCLogic {
       downloads: [],
       showDownloads: 'none',
       founders: [
-        { name: 'D. Shanmugam', role: 'Founder', bio: 'A short line about background and role in the business.', photoSrc: 'assets/founder-shanmugam.jpg', photoDisplay: 'block', noPhoto: false },
-        { name: 'A. Saravanan', role: 'Partner', bio: 'A short line about background and role in the business.', photoSrc: 'assets/founder-saravanan.jpg', photoDisplay: 'block', noPhoto: false },
-        { name: 'V. Rajasekaramaran', role: 'Partner', bio: 'A short line about background and role in the business.', photoSrc: '', photoDisplay: 'none', noPhoto: true },
+        { name: 'D. Shanmugam', role: 'Founder', bio: 'Founder of SS Airtech Solutions, brings 35+ years of expertise in compressed air and energy management solutions.', photoSrc: 'assets/founder-shanmugam.jpg', photoDisplay: 'block', noPhoto: false },
+        { name: 'A. Saravanan', role: 'Partner', bio: '35+ Years of Industrial Experience in the Compressor Industry', photoSrc: 'assets/founder-saravanan.jpg', photoDisplay: 'block', noPhoto: false },
+        { name: 'V. Rajasekaramaran', role: 'Partner', bio: '35+ Years of Industrial Experience in the Compressor Industry', photoSrc: '', photoDisplay: 'none', noPhoto: true },
       ],
       sent: this.state.sent,
       notSent: !this.state.sent,
